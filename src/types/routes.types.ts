@@ -1,5 +1,8 @@
-import {Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
+/*
+    HttpMethod to have autocomplete for the HTTP methods
+*/
 type HttpMethod = 'get' | 'post' | 'put' | 'delete';
 
 interface ParamsDictionary {
@@ -12,6 +15,9 @@ type ControllerFunction<T> = (
     next: NextFunction
 ) => void;
 
+/*
+    Object to define the route structure
+*/
 export type Route<T> = {
     method: HttpMethod;
     path: string;

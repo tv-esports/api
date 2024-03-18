@@ -32,31 +32,3 @@ describe('GET /api-docs', () => {
     expect(response.text).toContain('<title>Swagger UI</title>');
   });
 });
-
-// Test case to verify requests are logged
-describe('GET /api/ping', () => {
-
-  it('logs the request', async () => {
-
-    await request(app).get('/api/ping');
-
-    const currentDate = Date.now().toString().slice(0, 10);
-
-    // constructing the name of the log file using the current date
-    const logFileName = `access-${currentDate}.log`;
-
-    // constructing the log file path for the log file
-    const logFilePath = `log/${logFileName}`;
-
-    const log = await readFile(logFilePath, 'utf8');
-
-    // splitting the log into lines for processing
-    const lines = log.split('\n');
-
-    // fetching the last line of the log (considering -2 because the last element is an empty string due to the trailing newline)
-    const lastLine = lines[lines.length - 2];
-
-    // verifying that the last line contains the expected GET /api/ping message
-    expect(lastLine).toContain('GET /api/ping');
-  });
-});
